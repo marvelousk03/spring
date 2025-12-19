@@ -3,19 +3,38 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Taco Cloud</title>
+
+    <!-- Link to external CSS file using Thymeleaf syntax -->
+    <!-- @{} resolves the path based on the application's context root -->
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 
 <body>
 
+<!-- Page heading -->
 <h1>Discount codes:</h1>
 
+<!-- Unordered list to display all discount codes -->
 <ul>
+    <!-- Loop through each code in the 'codes' model attribute -->
+    <!-- 'code' represents a single entry in the collection -->
     <li th:each="code : ${codes}">
+        <!-- Display the discount code key (e.g., "SAVE10") -->
         Use code <b>"<span th:text="${code.key}"></span>"</b> for
-        <span th:text="${code.value}"></span>% off your order.</li>
+        <!-- Display the discount value (e.g., "10") -->
+        <span th:text="${code.value}"></span>% off your order.
+    </li>
 </ul>
 
 </body>
-
 </html>
+
+<!--Explanation of the Thymeleaf parts:-->
+
+<!--xmlns:th="http://www.thymeleaf.org" → Enables Thymeleaf attributes like th:text, th:each, and th:href.-->
+
+<!--th:href="@{/styles.css}" → Resolves to the correct path for your CSS file depending on where your app is deployed.-->
+
+<!--th:each="code : ${codes}" → Iterates over the codes collection provided by your Spring controller.-->
+
+<!--th:text="${code.key}" and th:text="${code.value}" → Dynamically replace the text inside the element with values from the model.-->
